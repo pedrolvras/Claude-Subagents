@@ -1,6 +1,6 @@
 ---
 name: dev-reviewer
-description: Revisa o código alterado no projeto atual contra as regras do CLAUDE.md e os critérios da tarefa, sem alterar arquivos. Use depois do dev-coder ou para "revisa/confere/audita" código já escrito.
+description: Revisa o código alterado no projeto atual contra as regras do CLAUDE.md e os critérios da tarefa, sem alterar arquivos. Use depois do coder (Gemini, skill gemini) ou para "revisa/confere/audita" código já escrito.
 model: opus
 effort: medium
 tools: Read, Glob, Grep, Bash

@@ -63,26 +63,32 @@ Nunca testar em produção.
 
 ## Esteira de trabalho
 
-| Etapa | Quem | Modelo |
-|---|---|---|
-| 1. Planejar | sessão principal (plan mode / skill `planejar`) | Opus medium |
-| 1b. Passar a proposta aprovada para tarefas no `plano.md` | agente `dev-task-writer` | Opus medium |
-| 2. Codar | agente `dev-coder` | Sonnet medium |
-| 3. Revisar | agente `dev-reviewer` | Opus medium |
-| 4. Montar a bateria de testes (seção da etapa no `APLICAR.md`) | agente `dev-test-designer` | Haiku 5.5 |
-| 5. Aplicar em dev (migration, env, subir) | humano ou sessão principal | — |
-| 6. Testar na tela | agente `dev-tester` (navegador) | Sonnet medium |
-| 7. Falhou sem causa óbvia | agente `dev-debugger` | Opus high |
+| Etapa | Quem | Executor | Modelo |
+|---|---|---|---|
+| 1. Planejar | sessão principal (plan mode / skill `planejar`) | Claude | Opus medium |
+| 1b. Passar a proposta aprovada para tarefas no `plano.md` | agente `dev-task-writer` | Claude | Opus medium |
+| 2. Codar (com lint/testes antes do reviewer) | skill `gemini`, papel coder | Gemini (`agy`) | Gemini 4 Argon (Medium) |
+| 3. Revisar | agente `dev-reviewer` | Claude | Opus medium |
+| 4. Montar a bateria de testes (seção da etapa no `APLICAR.md`) | skill `gemini`, papel test-designer | Gemini (`agy`) | Gemini 3.8 Flash (High) |
+| 5. Aplicar em dev (migration, env, subir) | humano ou sessão principal | — | — |
+| 6. Testar na tela | comando `/testar` (agente `dev-tester`), só o humano chama | Claude | Sonnet medium |
+| 7. Falhou sem causa óbvia | agente `dev-debugger` | Claude | Opus high |
 
 Regras:
 - Funcionalidade nova ou mudança em mais de um arquivo/camada -> passa pela esteira, com tarefa em
   `.claude/planejamento/plano.md` (formato na seção "Formato de tarefa nova" dele). Correção pequena e
   óbvia -> direto, sem esteira.
 - O `plano.md` é só a especificação do que vai ser implementado, nunca log nem fonte da verdade.
-  A tarefa sai de lá assim que o reviewer aprova; tarefa desfeita ou substituída sai na hora. Na saída:
+  A tarefa sai de lá depois que o reviewer aprova e o test-designer monta a bateria; tarefa desfeita ou substituída sai na hora. Na saída:
   aplicação e testes vão para a seção da etapa no `APLICAR.md`, o status para o `CONTEXTO.md` e o que foi
   feito para o `CHANGELOG.md`. Regra que vale para toda tarefa fica aqui, não no plano.
 - Cada tarefa precisa ser autossuficiente (arquivos, tabelas, critérios de aceite, testes com resultado esperado).
 - Ao delegar, cite só a tarefa: "implemente a tarefa T1 de .claude/planejamento/plano.md". Não recopie o plano.
-- Teste no navegador só em ambiente de desenvolvimento. Nenhum agente faz deploy nem commit.
+- Cada tarefa do Gemini roda numa worktree nova do Orca (`tarefa-<T>`), com o `agy` num terminal visível
+  do Orca. Lint, testes, reviewer e test-designer rodam nessa mesma worktree.
+- Reviewer com defeito ou lint/testes falhando -> volta para a mesma sessão do Gemini no terminal do Orca, até 2
+  rodadas cada; depois disso, o humano decide ou chama o `dev-debugger`.
+- Commitar a `.claude/` no git: a worktree só recebe o que está commitado.
+- Teste no navegador só em ambiente de desenvolvimento e só pelo `/testar`. Nenhum agente faz deploy nem commit;
+  a sessão principal sugere o commit ao humano quando o reviewer aprova a tarefa.
 - Quando um roteiro de teste estiver estável, o `dev-tester` pode ir para `model: haiku`.
