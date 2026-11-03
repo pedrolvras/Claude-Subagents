@@ -27,11 +27,9 @@ Nada é codado durante o planejamento: o resultado é um documento de proposta e
 
 5. **Incorporar as respostas.** Atualizar a decisão e levar a mudança a todas as seções que ela afeta (banco, telas, testes, tarefas). Registrar no changelog do projeto, se houver. Repetir até não sobrar nada "a confirmar".
 
-6. **Só depois de aprovado:** passar as tarefas para o arquivo de plano do projeto, cada uma autossuficiente (telas e eventos, tabelas, o que fazer, critérios de aceite, testes com resultado esperado exato).
+6. **Só depois de aprovado:** passar as tarefas para o arquivo de plano do projeto, cada uma autossuficiente (arquivos e rotas, tabelas, o que fazer, critérios de aceite, testes com resultado esperado exato).
 
 ## Modelo do documento
-
-Para o nível de detalhe e o tom, ver o exemplo real em references/exemplo-proposta.md. Usar só como referência de formato: o conteúdo dele é de outro projeto.
 
 ```markdown
 # Modificações — etapa NN: <título>
@@ -104,11 +102,9 @@ Seções que não se aplicam saem; camadas que o projeto tem a mais (API, relat�
 - **Segurança:** quem pode cada ação, conferido no servidor e não só escondendo botão; validação de entrada; escape de todo texto que vai ao HTML; caminho de arquivo sem `..`; link de arquivo nunca direto ao disco.
 - **Testes negativos:** além do caminho feliz, sem permissão, outra pessoa, prazo vencido, texto com `<b>` e aspas, script rodado duas vezes, troca de configuração.
 - **Exemplos concretos:** um caminho real, um valor de busca e o resultado esperado, uma combinação de dados (ex.: níveis 8, 8, 6 e 12 e como ficam).
-- **Arquivos por tela:** cada tela cita os arquivos, eventos e fontes que mudam, e o que sai deles.
-- **Ações do humano:** o que não é código (criar ou apagar aplicação na IDE, rodar script, remover tarefa agendada, dar permissão no banco) fica escrito, com quem faz.
+- **Arquivos por tela:** cada tela cita os arquivos, rotas e componentes que mudam, e o que sai deles.
+- **Ações do humano:** o que não é código (rodar script ou migration, configurar variável de ambiente, remover tarefa agendada, dar permissão no banco) fica escrito, com quem faz.
 - **Documentação:** listar cada arquivo de documentação do projeto que muda (regras, contexto, guia de aplicação) e o quê.
-
-
 
 ## Ao fim de cada rodada
 
@@ -117,18 +113,3 @@ Resposta curta no chat (o detalhe fica no documento):
 - conflitos encontrados com o código, se houver;
 - as perguntas que faltam, com a opção recomendada;
 - o próximo passo.
-
-=== references/roteiro-rascunho.md ===
-# Roteiro para escrever o rascunho
-
-Para o usuário preencher antes do planejamento, com as próprias palavras, em tópicos. Não precisa saber nada de banco nem de código: o Claude completa essa parte.
-
-1. **O que muda para quem usa?** Ex.: "o documento não vai mais para o outro setor".
-2. **Como fica o fluxo, passo a passo?** De onde começa até onde termina, com os status (Rascunho, Concluído...).
-3. **Quem pode fazer o quê?** Por perfil: chefe, colaborador, leitor... O que cada um vê, edita, aprova, exclui.
-4. **O que deixa de existir?** Ex.: "acabam os e-mails", "sai o filtro Setor".
-5. **Regras e exceções.** Ex.: "sigiloso: só o chefe vê", "só pode excluir em Rascunho".
-6. **Mensagens ou telas que você já imagina.** Pode ser um texto de aviso, um botão novo, um campo.
-7. **Dúvidas que você ainda tem.** Pode escrever "não sei se X ou Y": vira pergunta para decidir.
-
-  

@@ -1,8 +1,9 @@
 ---
 name: dev-tester
-description: Testa uma etapa na tela, no ambiente de desenvolvimento do projeto atual, seguindo os casos do .claude/planejamento/APLICAR.md. Use depois que a mudança estiver aplicada e rodando em dev.
+description: Testa uma etapa na tela, no ambiente de desenvolvimento do projeto atual, seguindo os casos do .claude/planejamento/APLICAR.md. Só pelo comando /testar do usuário; não delegar por conta própria.
 model: sonnet
 effort: medium
+disallowedTools: Edit, Write, NotebookEdit
 ---
 
 Você testa telas do projeto atual no navegador, só no ambiente de desenvolvimento descrito na seção "Ambiente de teste" do `.claude/CLAUDE.md` (URL, como subir, logins de teste).
