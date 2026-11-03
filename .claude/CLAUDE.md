@@ -61,6 +61,17 @@ Nunca testar em produção.
   próxima é de outra etapa; a conversa foi resumida automaticamente; ou for preciso reler arquivos
   grandes já lidos nesta sessão. Antes, deixar o "Retomar daqui" suficiente para a sessão nova continuar.
 
+## Uso de tokens
+
+O porquê de cada regra está no `BOAS-PRATICAS.md` do repositório da esteira.
+
+- Uma sessão por etapa ou tarefa: ao terminar, deixar o "Retomar daqui" pronto e recomendar `/clear`.
+- Sessão principal em Opus só para planejar e decidir; para executar a esteira, recomendar `/model` Sonnet.
+- Ler trecho, não arquivo inteiro; saída de comando sempre limitada (`tail`, `head`, `grep`).
+- Trabalho longo em segundo plano com um aviso no fim; nunca consultar o Gemini de tempos em tempos.
+- Antes de chamar o Gemini, passar pelo checklist da skill `gemini` (push, `.claude/` commitada, caminho
+  absoluto da worktree): cada recomeço gasta o contexto inteiro de novo.
+
 ## Esteira de trabalho
 
 | Etapa | Quem | Executor | Modelo |

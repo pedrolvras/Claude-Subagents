@@ -11,6 +11,7 @@ Esteira de trabalho para o Claude Code: agentes, a skill `planejar` e o modelo d
 | `skills/gemini/` | Skill que roda as etapas do Gemini pelo `agy` (papéis coder e test-designer em `papeis/`) |
 | `skills/testar/` | Comando `/testar <etapa>`: chama o `dev-tester` |
 | `.claude/` | Modelo do `CLAUDE.md` e da pasta `planejamento/` para copiar em cada projeto |
+| `BOAS-PRATICAS.md` | Como gastar menos token e evitar retrabalho na esteira (lições do primeiro teste) |
 
 ## Esteira
 
